@@ -974,3 +974,15 @@ details.chart-data .table th, details.chart-data .table td { padding: 6px 10px; 
   font-size: 12px;
   opacity: 0.75;
 }
+
+/* Conclusion Section */
+
+#conclusion p {
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+#conclusion .sub {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}

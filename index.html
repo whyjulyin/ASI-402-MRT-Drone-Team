@@ -40,6 +40,7 @@
   <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav">Sections</button>
   <nav class="nav" id="nav" aria-label="Report sections">
     <a href="#introduction">Introduction</a>
+    <a href="#team">Team</a>
     <a href="#background">Background</a>
     <a href="#concept">Concept</a>
     <a href="#propulsion">Propulsion</a>
@@ -48,7 +49,7 @@
     <a href="#comms">Comms</a>
     <a href="#testing">Testing</a>
     <a href="#plan">Plan</a>
-    <a href="#team">Team</a>
+    <a href="#conclusion">Conclusion</a>
     <a href="#appendix">Appendix</a>
   </nav>
   <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
@@ -114,17 +115,18 @@
     <header class="sec-head">
       <p class="eyebrow"><b>01</b> Project Overview</p>
       <h2>Introduction</h2>
-      <p class="lede">The University Rover Challenge (URC) is held each year by the Mars Society at the Mars Desert Research Station in southern Utah. Student-built rovers earn up to 400 points across four field missions. Ours expects to cover undulating terrain out to 2&nbsp;km from the base station, far enough for ridges and canyon walls to cut its radio link.</p>
+      <p class="lede">The University Rover Challenge (URC) is a robotics competition for university students, organized annually by the Mars Society near the Mars Desert Research Station (MDRS) in the desert of southern Utah, United States. The competition tasks student teams with designing and building next-generation Mars exploration rovers capable of executing field missions that simulate real planetary surface operations.</p>
+      <p class="lede">Field performance is evaluated across 4 distinct missions: Delivery, Autonomy, Equipment Servicing, and Astrobiology. Each mission is worth 100 points, with a maximum achievable score of 400 mission points. The use of a drone is permitted in the Delivery and Autonomy missions. Overall team standings combine field mission points with preliminary evaluations from the System Acceptance Review (SAR), which is submitted prior to the field competition.</p>
     </header>
 
     <div class="grid g2">
       <article class="card">
         <h3>Problem Statement</h3>
-        <p>Our mars rover traverses a large competition field spanning up to 2km with undulating terrain. When direct line-of-sight with the Command and Control (C2) station is broken, it loses its RF link for telemetry and video. MRT requires an aerial solution for reconnaissance and to maintain connection in NVLOS situations.</p>
+        <p>For this competition, our mars rover traverses a large competition field spanning up to 2km with undulating terrain. When direct line-of-sight with the Command and Control (C2) station is broken, it loses its RF link for telemetry and video. The team requires an aerial solution for reconnaissance and to assists in maintaining rover connection in Non-visual Line-of-Sight (NVLOS) situations.</p>
       </article>
       <article class="card card-accent">
         <h3>Proposed Solution</h3>
-        <p>A quadcopter that hovers above obstructions as an airborne repeater, giving a non-visual line-of-sight (NVLOS) relay, and carries a gimballed camera to scout drive paths, find scattered equipment and spot elevated ArUco markers.</p>
+        <p>A quadcopter that hovers above obstructions as an airborne repeater, giving a NVLOS relay, and carries a gimballed camera to scout drive paths, find scattered equipment and spot elevated ArUco markers.</p>
       </article>
     </div>
 
@@ -172,7 +174,7 @@
     <header class="sec-head">
       <p class="eyebrow"><b>02</b> Background</p>
       <h2>Literature Review - URC2026 Drone Team</h2>
-      <p class="lede">Our predecessor’s platform suffered from structural, electrical, and scaling bottlenecks. The baseline platform utilized a 580 mm wheelbase frame equipped with standard 4008 motors, 15-inch folding propellers, and a 6S 10,000 mAh Li-Ion pack flying at a total weight of 2,654 g. </p>
+      <p class="lede">Our predecessor’s platform utilized a 580 mm wheelbase frame equipped with standard 4008 motors, 15-inch folding propellers, and a 6S 10,000 mAh Li-Ion pack flying at a total weight of 2,654 g. It suffered from structural, electrical, and scaling bottlenecks, which we aimed to address in our design.</p>
     </header>
 
     <div class="grid g-photo">
@@ -437,7 +439,7 @@
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow"><b>07</b> Communications</p>
-      <h2>RF Links</h2>
+      <h2>Radio Frequency (RF) Links</h2>
       <p class="lede">This section details the design of the NVLOS communications link between the rover, base station and drone, the architecture for live video feed and radio control. We split the communication systems into three independent wireless links for each function. This allows us to design and evaluate the control, video and rover telemetry separately within their own frequency band, accounting for latency and reliability. </p>
     </header>
 
@@ -515,9 +517,9 @@
 </figure>
 
     <div class="grid g3 mt">
-      <article class="card"><h4>Control</h4><p>35.4&nbsp;dB at 2.4&nbsp;GHz and 50.9&nbsp;dB at 900&nbsp;MHz. Either band meets the target with room to spare.</p></article>
-      <article class="card"><h4>Relay</h4><p>23.4&nbsp;dB per hop, the same in both directions.</p></article>
-      <article class="card card-warn"><h4>Video is the limiting link</h4><p>13.7&nbsp;dB with the stock antenna. An 8&nbsp;dBi directional antenna raises it to 19.7&nbsp;dB; a range test will confirm before purchase.</p></article>
+      <article class="card"><h4>2.4GHz Control</h4><p>35.4&nbsp;dB at 2.4&nbsp;GHz and 50.9&nbsp;dB at 900&nbsp;MHz. Either band meets the target with room to spare.</p></article>
+      <article class="card"><h4>2.4GHz Relay</h4><p>23.4&nbsp;dB per hop, the same in both directions.</p></article>
+      <article class="card card-warn"><h4>5.8GHz Video is the limiting link</h4><p>13.7&nbsp;dB with the stock antenna. An 8&nbsp;dBi directional antenna raises it to 19.7&nbsp;dB; The stock antenna's performance will be confirmed in our range test before purchase.</p></article>
     </div>
     <p class="note">Control and relay both use 2.4&nbsp;GHz. We plan to place them on channels at opposite ends of the band and verify this by test. Singapore’s IMDA restricts 900&nbsp;MHz relays locally, and other rover radios may share that band, so its use will be settled in testing.</p>
   </div>
@@ -530,7 +532,7 @@
     <header class="sec-head">
       <p class="eyebrow"><b>08</b> Testing</p>
       <h2>Timeline for Testing</h2>
-      <p class="lede">Throughout this first semester, our team established our preliminary system architecture and component selections, conducting RF link tests to evaluate the feasibility of the proposed design. Our next step is to conduct individual component level tests.</p>
+      <p class="lede">Throughout this first semester, our team established our preliminary system architecture and component selections, conducting RF link tests to evaluate the feasibility of the proposed design. Our next step is to conduct individual component level tests to validate our design parameters.</p>
     </header>
 
     <ol class="pipeline" id="pipeline"></ol>
@@ -552,6 +554,7 @@
 
     <h3 class="sub">End of Semester Field Testing</h3>
     <p class="body">Our preliminary testing has shown individual connection between the components are feasible. Our following field tests conducted in reading week will provide more comprehensive performance data to verify both maximum link range and end-to-end connectivity.</p>
+    <p class="body">During this time, we also plan to simultaneously conduct battery performance validation, and motor-thrust testing before we proceed with the preliminary assembly of the drone itself. </p>
     <div class="table-wrap"><table class="table" id="validation-table"></table></div>
   </div>
 </section>
@@ -563,7 +566,7 @@
     <header class="sec-head">
       <p class="eyebrow"><b>09</b> Technical Challenges, risk management and plan</p>
       <h2>Technical Challenges</h2>
-      <p class="lede">During our first semester, we encountered two main technical challenges. These were managed with explicit margins now and resolved by testing next.</p>
+      <p class="lede">During our first semester, we encountered two main technical challenges. These challenges These were managed with explicit margins now and resolved by testing .</p>
     </header>
 
     <div class="grid g2 align-start">
@@ -599,7 +602,7 @@
 
 <div class="risk-images">
 
-  <!-- Before Mitigation -->
+  <!-- Risk Mitigation -->
   <figure class="figure risk-image-card">
 
     <h4>Before Mitigation</h4>
@@ -611,35 +614,14 @@
     />
 
     <figcaption>
-      Figure: Initial risk assessment
-      before mitigation measures.
+      Figure: risk assessment
+      before and after mitigation measures.
     </figcaption>
-
-  </figure>
-
-  <!-- After Mitigation -->
-  <figure class="figure risk-image-card">
-
-    <h4>After Mitigation</h4>
-
-    <img
-      src="img/risk_after.png"
-      alt="Risk assessment matrix after mitigation"
-      loading="lazy"
-    />
-
-    <figcaption>
-      Figure: Revised risk assessment
-      following implementation of
-      mitigation strategies.
-    </figcaption>
-
-  </figure>
 
 </div>
 
 
-    <h3 class="sub">Roadmap</h3>
+    <h3 class="sub">Overall Project Timeline</h3>
     <ol class="phases" id="phase-list"></ol>
     <div class="tracks">
       <div class="track">
@@ -660,6 +642,38 @@
     </figure>
   </div>
 </section>
+
+
+<!-- ========================================= -->
+<!-- CONCLUSION SECTION                        -->
+<!-- ========================================= -->
+
+<section id="conclusion" class="section">
+  <div class="container">
+
+    <h2>Conclusion</h2>
+
+    <h3 class="sub">Project Summary</h3>
+
+    <p>
+      Our project aims to develop a custom quadcopter for supporting the NUS Mars Rover Team in the University Rover Challenge 2027, with our main capabilities of aerial reconnaissance and establishing NVLOS communications relay. Overall, we laid the foundation of our design in this semester through an iterative design process, and developed a clear plan for full integration and operational testing of the drone in semester 2.
+    </p>
+
+    <h3 class="sub">Current Progress</h3>
+
+    <p>
+      Throughout this first semester, our team established our preliminary system architecture and component selections, conducting subsystem-level analysis to evaluate the feasibility of the proposed design. Significant progress was made in propulsion and battery optimisation, mechanical design, electrical system integration and wireless communication architecture. Using iterative mass budgeting, flight endurance estimation, and link budgeting calculations, we developed a design that both achieves mission objectives and stays within competition restrictions. Initial wireless repeater connectivity has also been successfully established.
+    </p>
+
+    <h3 class="sub">Future Work</h3>
+
+    <p>
+      Nevertheless, uncertainties remain in terms of actual flight performance, due to a heavy reliance on manufacturer specifications and theoretical calculation frameworks. While conservative design margins have been incorporated to account for our potential discrepancies, further experimental validation required to verify actual performance and reliability. In semester 2, we aim to complete mechanical and electrical integration of the parts, along with individual component testing, before proceeding with flight tests, CV integration and ultimately mission planning for the final competition. These activities will help to address our uncertainties in flight performance and evaluate the system against our initial design requirements, to ensure an operationally ready drone before our final submission and URC2027 Competition.
+    </p>
+
+  </div>
+</section>
+
 
 <!-- ============================================================ APPENDIX -->
 <section class="band light appendix" id="appendix">

@@ -512,7 +512,7 @@ window.DRONE = {
       work: ['Wiring architecture', 'Flight-controller and ESC selection', 'CAD assembly modelling', 'Controller software integration', 'PID tuning'],
       sections: ['electrical'] },
     { id: 'benedict', name: 'Benedict Lim Wei Chen', short: 'Benedict', role: 'Propulsion and power systems', track: 'Aeronautical specialisation',
-      photo: '',
+      photo: 'assets/img/team-benedict.png',
       work: ['Motor–propeller selection', 'Battery sizing and modelling', 'Thrust testing and validation'],
       sections: ['concept', 'propulsion'] },
     { id: 'zihann', name: 'Looi Zi Hann', short: 'Zi Hann', role: 'Team member', track: 'Aeronautical specialisation',
