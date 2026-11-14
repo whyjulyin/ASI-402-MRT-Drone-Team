@@ -39,7 +39,7 @@
   </a>
   <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav">Sections</button>
   <nav class="nav" id="nav" aria-label="Report sections">
-    <a href="#mission">Mission</a>
+    <a href="#introduction">Introduction</a>
     <a href="#background">Background</a>
     <a href="#concept">Concept</a>
     <a href="#propulsion">Propulsion</a>
@@ -85,37 +85,56 @@
   </div>
 </section>
 
-<!-- ============================================================= MISSION -->
-<section class="band light" id="mission">
+<!-- ================================================================ TEAM -->
+<section class="band dark" id="team">
+  <svg class="motif motif-checker" aria-hidden="true"><use href="#checker"/></svg>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow"><b>00</b> Team</p>
+      <h2>Workload Distribution</h2>
+      <p class="lede">Our drone subsystem consists of 4 members, forming one of eight subsystems in the NUS Mars Rover Team, preparing for URC 2027. Responsibilities are tailored to our individual specialisations.</p>
+    </header>
+
+    <div class="team-cards" id="team-cards"></div>
+
+    <h3 class="sub">Workstreams by project phase</h3>
+    <div class="table-wrap"><table class="table matrix-table" id="workstream-table"></table></div>
+
+    <h3 class="sub">NUS Mars Rover Team subsystems</h3>
+    <ul class="subsystems" id="subsystems"></ul>
+
+    <p class="ack"><h2>Acknowledgements</h2>We thank our supervisors, Mr Eugene Ee and Professor Scott, the other Mars Rover Team subsystems, and the previous drone team for sharing their technical knowledge and experience.</p>
+  </div>
+</section>
+
+<!-- ============================================================= INTRODUCTION -->
+<section class="band light" id="introduction">
   <svg class="motif motif-dots" aria-hidden="true"><use href="#dots"/></svg>
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow"><b>01</b> Mission</p>
-      <h2>A rover that drives out of sight still has to stay in touch</h2>
+      <p class="eyebrow"><b>01</b> Project Overview</p>
+      <h2>Introduction</h2>
       <p class="lede">The University Rover Challenge (URC) is held each year by the Mars Society at the Mars Desert Research Station in southern Utah. Student-built rovers earn up to 400 points across four field missions. Ours expects to cover undulating terrain out to 2&nbsp;km from the base station, far enough for ridges and canyon walls to cut its radio link.</p>
     </header>
 
     <div class="grid g2">
       <article class="card">
-        <h3>The problem</h3>
-        <p>Radio signal weakens with distance and is blocked outright when terrain breaks line of sight (LOS). Once the rover drops behind a ridge, the Command and Control (C2) station loses its telemetry and video.</p>
+        <h3>Problem Statement</h3>
+        <p>Our mars rover traverses a large competition field spanning up to 2km with undulating terrain. When direct line-of-sight with the Command and Control (C2) station is broken, it loses its RF link for telemetry and video. MRT requires an aerial solution for reconnaissance and to maintain connection in NVLOS situations.</p>
       </article>
       <article class="card card-accent">
-        <h3>Our answer</h3>
-        <p>A quadcopter that hovers above the obstruction as an airborne repeater, giving a non-visual line-of-sight (NVLOS) relay, and carries a gimballed camera to scout drive paths, find scattered equipment and spot elevated ArUco markers.</p>
+        <h3>Proposed Solution</h3>
+        <p>A quadcopter that hovers above obstructions as an airborne repeater, giving a non-visual line-of-sight (NVLOS) relay, and carries a gimballed camera to scout drive paths, find scattered equipment and spot elevated ArUco markers.</p>
       </article>
     </div>
 
-    <h3 class="sub">Where the drone may fly</h3>
-    <div class="missions">
-      <div class="mission-tabs" id="mission-tabs" role="tablist" aria-label="URC missions"></div>
-      <div class="mission-panel card" id="mission-panel" role="tabpanel" tabindex="0"></div>
-    </div>
+    <h3 class="sub">URC2027 Missions</h3>
+    <div class="mission-grid" id="mission-grid"></div>
 
     <figure class="figure sim" id="sim">
       <div class="fig-head">
-        <h3>Try it: restore the link over a ridge</h3>
-        <p>Drag the rover and the drone, or use the sliders. Watch which paths keep a clear line of sight.</p>
+        <h3>Maintaining NVLOS Connectivity</h3>
+        <p>This illustration shows how the drone will be operated to maintain connectivity in NVLOS situations. We will fly the drone above major obstacles like hills and stay equidistant between the rover and C2 station to ensure a reliable communication link. This will primarily be used in the Delivery Mission.</p>
       </div>
       <div class="sim-stage" id="relay-sim"></div>
       <div class="sim-controls">
@@ -128,19 +147,20 @@
         <button class="btn btn-small" id="sim-reset" type="button">Planned relay position</button>
       </div>
       <div class="readouts r4" id="sim-readouts" aria-live="polite"></div>
-      <figcaption>Illustrative terrain, vertical scale exaggerated. Margins use the relay link budget from section 07 and assume free-space propagation along a clear line of sight.</figcaption>
+      <figcaption>Link budget calculations for this illustration are provided in section 07.</figcaption>
     </figure>
 
     <h3 class="sub">Design requirements and constraints</h3>
     <div class="grid g2" id="req-cards"></div>
-    <p class="aside">The 1:1 dummy-mass rule shapes every decision that follows: each gram of battery adds two grams to take-off mass.</p>
+    <p class="aside">The 1:1 dummy-mass rule was a key design constraint as each gram of battery adds two grams to the final take-off mass.</p>
 
-    <h3 class="sub">Design targets against current evidence</h3>
+    <h3 class="sub">Final Design Assessment</h3>
+    <p></p>
     <div class="table-wrap"><table class="table" id="targets-table"></table></div>
 
     <article class="card card-quiet">
-      <h3>Why a flat quadcopter?</h3>
-      <p>Against coaxial and hexacopter layouts it has the lowest structural mass, the fewest mechanical failure points in fine desert dust, and high hover efficiency under the mass rule.</p>
+      <h3>Why a quadcopter design?</h3>
+      <p>Evaluating against coaxial and hexacopter layouts, the quadcopter has the lowest structural mass, the fewest mechanical failure points in fine desert dust, and high hover efficiency under the mass rule.</p>
     </article>
   </div>
 </section>
@@ -151,8 +171,8 @@
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow"><b>02</b> Background</p>
-      <h2>What last year’s drone taught us</h2>
-      <p class="lede">The team’s previous drone is our baseline. It flew at 2,654&nbsp;g on a 580&nbsp;mm frame with 4008 motors, 15-inch folding propellers and a 6S 10&nbsp;Ah lithium-ion pack. Its design review exposed four limits that this project sets out to remove.</p>
+      <h2>Literature Review - URC2026 Drone Team</h2>
+      <p class="lede">Our predecessor’s platform suffered from structural, electrical, and scaling bottlenecks. The baseline platform utilized a 580 mm wheelbase frame equipped with standard 4008 motors, 15-inch folding propellers, and a 6S 10,000 mAh Li-Ion pack flying at a total weight of 2,654 g. </p>
     </header>
 
     <div class="grid g-photo">
@@ -179,26 +199,23 @@
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow"><b>03</b> Concept</p>
-      <h2>Use the whole 5&nbsp;kg</h2>
-      <p class="lede">Sizing is iterative: every change in component or battery mass alters take-off mass, required thrust, power and endurance. We ran the loop until the mass budget closed.</p>
+      <h2>Iterative Design Loop</h2>
+      <p class="lede">Our drone sizing was iterative; every change in component or battery mass alters take-off mass, required thrust, power and endurance. We ran the loop until the mass budget closed.</p>
     </header>
+    
+    <div class="method-grid" id="method-grid"></div>
 
-    <div class="method">
-      <ol class="method-steps" id="method-steps" role="tablist" aria-label="Design methodology"></ol>
-      <div class="method-panel card" id="method-panel" role="tabpanel" tabindex="0"></div>
-    </div>
-
-    <h3 class="sub">Concept study: 3&nbsp;kg or 5&nbsp;kg?</h3>
-    <p class="body">A lighter aircraft needs less power, but under the dummy-mass rule the battery competes with the fixed mission kit for every gram. We compared three concepts carrying the same kit.</p>
+    <h3 class="sub">Additional Concept study: 3&nbsp;kg or 5&nbsp;kg?</h3>
+    <p class="body">We compared between three concepts: two lighter designs that require less battery capacity, with our heavier design. Under the dummy-mass rule the battery competes with the fixed mission kit for every gram. We used this approach to evaluate the effects of increasing the drone's battery capacity and its impact on performance.</p>
 
     <div class="grid g2 align-start">
       <figure class="figure">
-        <div class="fig-head"><h3>Mass budget</h3><p>Kit and airframe come first; the battery and its dummy share what is left.</p></div>
+        <div class="fig-head"><h3>Mass budget</h3><p>The kit and airframes were selected first, followed by the battery and its dummy mass.</p></div>
         <div class="chart" id="chart-mass"></div>
-        <figcaption>Mass in grams. Growth is a 5% allowance held back for wiring and fasteners.</figcaption>
+        <figcaption>Accounts for 5% mass growth allowance for wiring and fasteners.</figcaption>
       </figure>
       <figure class="figure">
-        <div class="fig-head"><h3>Hover time per battery</h3><p>The 5&nbsp;kg design hovers 25% longer than the best 3&nbsp;kg option.</p></div>
+        <div class="fig-head"><h3>Hover time per Full Charge</h3><p>The 5&nbsp;kg design hovers 25% longer than the best 3&nbsp;kg option.</p></div>
         <div class="chart" id="chart-concept"></div>
         <figcaption>Model: airframe scaled with take-off mass, same mission kit, same assumptions as section 04.</figcaption>
       </figure>
@@ -218,7 +235,7 @@
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow"><b>04</b> Propulsion and energy</p>
-      <h2>Sized for hover, with thrust in reserve</h2>
+      <h2>Propulsion Sizing</h2>
       <p class="lede">The aircraft spends most of its mission hovering as a relay, so the propulsion system is chosen for hover efficiency first and for thrust reserve in desert wind second.</p>
     </header>
 
@@ -270,35 +287,9 @@
       <div class="table-wrap"><table class="table" id="prop-table"></table></div>
     </div>
 
-    <h3 class="sub"><span class="step-n">3</span>Battery and endurance</h3>
-    <p class="body">Because the dummy must match the battery, a heavier pack adds energy but also twice its own mass to lift. The sweep recalculates take-off mass, thrust, motor operating point and power for each battery mass.</p>
-    <figure class="figure explorer">
-      <div class="explorer-main">
-        <div class="fig-head"><h3>Hover time against battery mass</h3><p id="en-headline"></p></div>
-        <div class="chart" id="chart-endurance"></div>
-        <label class="slider wide"><span>Battery mass <output id="en-batt-out"></output></span>
-          <input type="range" id="en-batt" min="400" max="2500" step="10" value="1240"></label>
-        <div class="readouts r4 tight" id="en-readouts" aria-live="polite"></div>
-      </div>
-      <aside class="explorer-side">
-        <h4>Model assumptions</h4>
-        <label class="slider"><span>Specific energy <output id="en-se-out"></output></span>
-          <input type="range" id="en-se" min="200" max="350" step="1" value="287"></label>
-        <label class="slider"><span>Usable depth of discharge <output id="en-dod-out"></output></span>
-          <input type="range" id="en-dod" min="60" max="100" step="1" value="80"></label>
-        <label class="slider"><span>ESC efficiency <output id="en-esc-out"></output></span>
-          <input type="range" id="en-esc" min="80" max="100" step="1" value="90"></label>
-        <label class="slider"><span>Wiring efficiency <output id="en-wire-out"></output></span>
-          <input type="range" id="en-wire" min="80" max="100" step="1" value="90"></label>
-        <label class="slider"><span>Energy reserve <output id="en-res-out"></output></span>
-          <input type="range" id="en-res" min="0" max="30" step="1" value="15"></label>
-        <label class="slider"><span>Auxiliary load <output id="en-aux-out"></output></span>
-          <input type="range" id="en-aux" min="20" max="100" step="1" value="60"></label>
-        <button class="btn btn-small" id="en-reset" type="button">Reset to design values</button>
-      </aside>
-      <figcaption>Fixed mass 2,384&nbsp;g (everything except battery and dummy, including 5% growth). The 60&nbsp;W auxiliary load equals the summed peak draw of payload and avionics.</figcaption>
-    </figure>
-
+    <h3 class="sub"><span class="step-n">3</span>Battery Selection</h3>
+    <p class="body">Because the dummy mass must match the battery weight, a heavier pack adds energy but also twice its own mass to lift. This graph recalculates the final flight endurance, taking into account changes in take-off mass, thrust, motor operating point and power for each battery mass.</p>
+    
     <div class="grid g2 align-start mt">
       <div>
         <h4>What the sweep shows</h4>
@@ -324,8 +315,8 @@
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow"><b>05</b> Airframe</p>
-      <h2>Battery at the centre, camera underneath</h2>
-      <p class="lede">The symmetric four-arm frame is sized for 18-inch propellers. An upper platform carries the flight controller and radios; the lower section carries the battery and the camera gimbal.</p>
+      <h2>Airframe Design</h2>
+      <p class="lede">The symmetric four-arm frame is sized for 18-inch propellers. The upper platform carries the flight controller and radios, while the lower section carries the battery and the camera gimbal.</p>
     </header>
 
     <div class="anatomy" id="anatomy">
@@ -338,7 +329,7 @@
 
     <div class="grid g2 align-start mt">
       <figure class="figure viewer">
-        <div class="fig-head"><h3>Frame in 3D</h3><p>Drag to orbit, scroll or pinch to zoom.</p></div>
+        <div class="fig-head"><h3>3D View of Frame</h3></div>
         <div class="viewer-stage" id="viewer3d">
           <img src="assets/img/frame-poster.jpg" width="1100" height="768" loading="lazy" alt="Isometric view of the bare Tarot TL680A reference frame">
           <button class="btn btn-primary" id="viewer-load" type="button">Load 3D model <small>1.9&nbsp;MB</small></button>
@@ -353,11 +344,11 @@
       </figure>
       <div>
         <div class="card">
-          <h4>Selected frame</h4>
+          <h4>Frame Specifications</h4>
           <dl class="spec" id="frame-facts"></dl>
         </div>
-        <h4 class="mt">Status and next steps</h4>
-        <p class="body">The CAD assembly was built before the parts arrived. With hardware now in hand, the next steps are to 3D-scan complex parts, refine the mounts, verify propeller clearance and wiring access, locate the centre of gravity and run finite element analysis. No structural or flight validation has been done yet.</p>
+        <h4 class="mt"></h4>
+        <p class="body">This preliminary CAD assembly was built before the parts arrived. With hardware now in hand, we will verify the dimensions of the components, refine the mounts, propeller clearance and wiring access, locate the centre of gravity and run finite element analysis. No structural or flight validation has been done yet.</p>
       </div>
     </div>
   </div>
@@ -369,8 +360,8 @@
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow"><b>06</b> Electrical and control</p>
-      <h2>One battery, three supplies, four data paths</h2>
-      <p class="lede">The architecture separates propulsion power, regulated electronics power and data, so that a fault or noise on one cannot take down another. Select a block to see what is inside and why.</p>
+      <h2>Wiring Architecture</h2>
+      <p class="lede">The architecture separates propulsion power, regulated electronics power and data, so that a fault or noise on one cannot take down another. </p>
     </header>
 
     <figure class="figure arch">
@@ -446,8 +437,8 @@
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow"><b>07</b> Communications</p>
-      <h2>Three independent radio links</h2>
-      <p class="lede">Control, video and rover telemetry each get their own link, so losing or degrading one does not affect the others. Each was sized with a link budget before any hardware was bought.</p>
+      <h2>RF Links</h2>
+      <p class="lede">This section details the design of the NVLOS communications link between the rover, base station and drone, the architecture for live video feed and radio control. We split the communication systems into three independent wireless links for each function. This allows us to design and evaluate the control, video and rover telemetry separately within their own frequency band, accounting for latency and reliability. </p>
     </header>
 
     <figure class="figure">
@@ -457,6 +448,7 @@
 
     <div class="table-wrap mt"><table class="table" id="link-table"></table></div>
 
+    
     <h3 class="sub">Link budget</h3>
     <div class="grid g2 align-start">
       <div>
@@ -473,21 +465,54 @@
       </figure>
     </div>
 
-    <figure class="figure explorer mt">
-      <div class="explorer-main">
-        <div class="fig-head"><h3>Received power against range</h3><p id="lk-headline"></p></div>
-        <div class="seg wrap-seg" id="link-options" role="tablist" aria-label="Radio link"></div>
-        <div class="chart" id="chart-link"></div>
-        <label class="slider wide"><span>Range <output id="lk-dist-out"></output></span>
-          <input type="range" id="lk-dist" min="0.1" max="10" step="0.05" value="1.2"></label>
-        <label class="check" id="lk-cable-wrap"><input type="checkbox" id="lk-cable"> Add the 20&nbsp;m LMR400 base-station antenna cable</label>
-      </div>
-      <aside class="explorer-side">
-        <div class="readouts r1" id="lk-readouts" aria-live="polite"></div>
-        <p class="note" id="lk-note"></p>
-      </aside>
-      <figcaption>Free-space model with 2&nbsp;dB of connector and implementation loss. Excludes terrain, fading and interference; receiver sensitivities are provisional.</figcaption>
-    </figure>
+<!-- =========================================
+     RECEIVED POWER AGAINST RANGE
+     ========================================= -->
+
+<figure class="figure mt">
+
+  <div class="fig-head">
+    <h3>Received power against range</h3>
+    <p>
+      Comparison of the selected radio links
+      against their receiver sensitivity and
+      the minimum 20 dB link margin.
+    </p>
+  </div>
+
+  <!-- Shared range slider -->
+  <div class="link-range-control">
+
+    <label class="slider wide">
+      <span>
+        Operating range:
+        <output id="lk-dist-out">1.2 km</output>
+      </span>
+
+      <input
+        type="range"
+        id="lk-dist"
+        min="0.1"
+        max="10"
+        step="0.05"
+        value="1.2"
+      />
+    </label>
+
+  </div>
+
+  <!-- All radio link graphs -->
+  <div class="link-graphs-grid" id="link-graphs-grid"></div>
+
+  <figcaption>
+    Theoretical free-space propagation model.
+    Each graph shows received signal power,
+    receiver sensitivity and the 20 dB
+    link-margin threshold. Actual performance
+    requires experimental validation.
+  </figcaption>
+
+</figure>
 
     <div class="grid g3 mt">
       <article class="card"><h4>Control</h4><p>35.4&nbsp;dB at 2.4&nbsp;GHz and 50.9&nbsp;dB at 900&nbsp;MHz. Either band meets the target with room to spare.</p></article>
@@ -504,16 +529,16 @@
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow"><b>08</b> Testing</p>
-      <h2>First hardware result: the relay radios talk</h2>
-      <p class="lede">Design, preliminary testing and parts ordering are complete. Component testing begins now that the hardware has arrived.</p>
+      <h2>Timeline for Testing</h2>
+      <p class="lede">Throughout this first semester, our team established our preliminary system architecture and component selections, conducting RF link tests to evaluate the feasibility of the proposed design. Our next step is to conduct individual component level tests.</p>
     </header>
 
     <ol class="pipeline" id="pipeline"></ol>
 
-    <h3 class="sub">2.4&nbsp;GHz repeater compatibility test</h3>
+    <h3 class="sub">Preliminary 2.4&nbsp;GHz repeater compatibility test</h3>
     <div class="grid g2 align-start">
       <div class="steps">
-        <div><h4>Purpose</h4><p>The on-board GL.iNet repeater and the base-station Rocket M2 use different Wi-Fi configurations. Before building around them we checked that they interoperate.</p></div>
+        <div><h4>Purpose</h4><p>The on-board GL.iNet repeater and the base-station Rocket M2 use different Wi-Fi configurations. Before building around these systems we checked that they are compatible.</p></div>
         <div><h4>Method</h4><p>We joined the repeater to the Rocket M2 network, stood the two devices 10–15&nbsp;m apart and pinged in each direction, in both extender and router modes.</p></div>
         <div><h4>Result</h4><p>The first attempts timed out: the devices sat on different IP subnets. After the repeater was readdressed onto the Rocket M2 subnet, router mode returned all four packets in 2–30&nbsp;ms. Extender mode still failed.</p></div>
         <div><h4>Analysis</h4><p>Early pings succeeded in one direction only, which points to the repeater’s firewall rejecting unknown addresses. Next we will disable the firewall and repeat the test, then measure packet loss and throughput at range and across the full base–drone–rover chain.</p></div>
@@ -525,8 +550,8 @@
       </figure>
     </div>
 
-    <h3 class="sub">What is verified, and what is not</h3>
-    <p class="body">Only the repeater connection has been measured. Every other performance figure in this report is a calculation from manufacturer data, and is labelled as such.</p>
+    <h3 class="sub">End of Semester Field Testing</h3>
+    <p class="body">Our preliminary testing has shown individual connection between the components are feasible. Our following field tests conducted in reading week will provide more comprehensive performance data to verify both maximum link range and end-to-end connectivity.</p>
     <div class="table-wrap"><table class="table" id="validation-table"></table></div>
   </div>
 </section>
@@ -536,9 +561,9 @@
   <svg class="motif motif-dots" aria-hidden="true"><use href="#dots"/></svg>
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow"><b>09</b> Challenges, risk and plan</p>
-      <h2>Open problems and the road to flight</h2>
-      <p class="lede">Two technical challenges shaped the first semester. Both are managed with explicit margins now and resolved by testing next.</p>
+      <p class="eyebrow"><b>09</b> Technical Challenges, risk management and plan</p>
+      <h2>Technical Challenges</h2>
+      <p class="lede">During our first semester, we encountered two main technical challenges. These were managed with explicit margins now and resolved by testing next.</p>
     </header>
 
     <div class="grid g2 align-start">
@@ -565,19 +590,54 @@
       </article>
     </div>
 
-    <h3 class="sub">Risk and mitigation</h3>
-    <figure class="figure risk">
-      <div class="risk-grid">
-        <div>
-          <div class="seg" id="risk-toggle" role="group" aria-label="Risk state">
-            <button type="button" class="on" data-state="before">Before mitigation</button>
-            <button type="button" data-state="after">After mitigation</button>
-          </div>
-          <div class="matrix" id="risk-matrix"></div>
-        </div>
-        <div class="risk-list" id="risk-list"></div>
-      </div>
-    </figure>
+    
+<!-- =========================================
+     RISK AND MITIGATION
+     ========================================= -->
+
+<h3 class="sub">Risk and mitigation</h3>
+
+<div class="risk-images">
+
+  <!-- Before Mitigation -->
+  <figure class="figure risk-image-card">
+
+    <h4>Before Mitigation</h4>
+
+    <img
+      src="img/risk_before.png"
+      alt="Risk assessment matrix before mitigation"
+      loading="lazy"
+    />
+
+    <figcaption>
+      Figure: Initial risk assessment
+      before mitigation measures.
+    </figcaption>
+
+  </figure>
+
+  <!-- After Mitigation -->
+  <figure class="figure risk-image-card">
+
+    <h4>After Mitigation</h4>
+
+    <img
+      src="img/risk_after.png"
+      alt="Risk assessment matrix after mitigation"
+      loading="lazy"
+    />
+
+    <figcaption>
+      Figure: Revised risk assessment
+      following implementation of
+      mitigation strategies.
+    </figcaption>
+
+  </figure>
+
+</div>
+
 
     <h3 class="sub">Roadmap</h3>
     <ol class="phases" id="phase-list"></ol>
@@ -593,33 +653,11 @@
     </div>
 
     <figure class="figure gantt-fig">
-      <div class="fig-head"><h3>Project schedule</h3><p>35 tasks across two semesters. Filter by workstream; hover or focus a bar for detail.</p></div>
+      <div class="fig-head"><h3>Project Gantt Chart</h3><p>35 tasks across two semesters.</p></div>
       <div class="seg wrap-seg" id="gantt-filters" role="group" aria-label="Filter tasks"></div>
       <div class="gantt-scroll"><div class="gantt" id="gantt"></div></div>
       <figcaption>Status as recorded in the team Gantt chart at the interim presentation.</figcaption>
     </figure>
-  </div>
-</section>
-
-<!-- ================================================================ TEAM -->
-<section class="band dark" id="team">
-  <svg class="motif motif-checker" aria-hidden="true"><use href="#checker"/></svg>
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow"><b>10</b> Team</p>
-      <h2>Who did what</h2>
-      <p class="lede">Four students form the drone subsystem of the NUS Mars Rover Team, one of eight subsystems preparing for URC 2027. Responsibilities follow each member’s specialisation.</p>
-    </header>
-
-    <div class="team-cards" id="team-cards"></div>
-
-    <h3 class="sub">Workstreams by project phase</h3>
-    <div class="table-wrap"><table class="table matrix-table" id="workstream-table"></table></div>
-
-    <h3 class="sub">NUS Mars Rover Team subsystems</h3>
-    <ul class="subsystems" id="subsystems"></ul>
-
-    <p class="ack">We thank our supervisors, Mr Eugene Ee and Professor Scott, the other Mars Rover Team subsystems, and the previous drone team for sharing their technical knowledge and experience.</p>
   </div>
 </section>
 

@@ -791,3 +791,186 @@ details.chart-data .table th, details.chart-data .table td { padding: 6px 10px; 
   .js .reveal { opacity: 1; transform: none; }
   details.app > .app-body { display: block; }
 }
+
+
+/* =========================================
+   STATIC MISSION AND METHODOLOGY GRIDS
+   ========================================= */
+
+.mission-grid,
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+  margin-bottom: 32px;
+}
+
+/* Mission cards */
+
+.mission-static,
+.method-static {
+  height: 100%;
+  min-width: 0;
+}
+
+.mission-static .pts {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mission-static h4,
+.method-static h4 {
+  margin-bottom: 12px;
+}
+
+.mission-status {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 6px 10px;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.mission-disabled {
+  opacity: 0.75;
+}
+
+.mission-disabled .mission-status {
+  color: var(--muted, #94a3b8);
+}
+
+.mission-static .roles {
+  margin-top: 16px;
+}
+
+/* Methodology cards */
+
+.method-static .big-n {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.method-subtitle {
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.method-static .loop {
+  margin-top: 16px;
+}
+
+/* Mobile layout */
+
+@media (max-width: 768px) {
+  .mission-grid,
+  .method-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================
+   MULTIPLE LINK-BUDGET GRAPHS
+   ========================================= */
+
+.link-graphs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.link-graph-card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.link-graph-card h4 {
+  margin-bottom: 8px;
+}
+
+.link-graph-card .note {
+  min-height: 36px;
+}
+
+.link-chart {
+  width: 100%;
+  min-height: 290px;
+  margin-top: 15px;
+}
+
+.link-chart svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.link-graph-readout {
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line, #334155);
+
+  font-size: 12px;
+  line-height: 1.8;
+  font-weight: 600;
+}
+
+.link-range-control {
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+@media (max-width: 900px) {
+  .link-graphs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================
+   RISK MITIGATION IMAGES
+   ========================================= */
+
+.risk-images {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 24px;
+}
+
+.risk-image-card {
+  width: 100%;
+  margin: 0;
+}
+
+.risk-image-card h4 {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.risk-image-card img {
+  display: block;
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin: 0 auto;
+
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.risk-image-card figcaption {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.75;
+}

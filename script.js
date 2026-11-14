@@ -99,32 +99,57 @@
   }
 
   /* ---------------------------------------------------------- mission */
-  function missions() {
-    var tabs = $('#mission-tabs'), panel = $('#mission-panel'); if (!tabs) return;
-    var cur = 0;
-    D.missions.forEach(function (m, i) {
-      tabs.appendChild(h('button', { type: 'button', role: 'tab', class: 'mission-tab' + (m.drone ? '' : ' no'), id: 'mission-tab-' + m.id,
-        onclick: function () { cur = i; render(); } }, [
-        h('span', { class: 'pts', text: m.points + ' points' }),
-        h('span', { class: 'name', text: m.name }),
-        h('span', { class: 'flag', text: m.drone ? 'Drone flies' : 'No drone' })
-      ]));
+  
+function missions() {
+  var grid = $('#mission-grid');
+  if (!grid) return;
+
+  D.missions.forEach(function (m) {
+    var card = h('article', {
+      class: 'card mission-static' + (m.drone ? '' : ' mission-disabled')
     });
-    function render() {
-      var m = D.missions[cur];
-      $$('.mission-tab', tabs).forEach(function (b, i) { b.classList.toggle('on', i === cur); b.setAttribute('aria-selected', i === cur ? 'true' : 'false'); });
-      panel.textContent = '';
-      panel.setAttribute('aria-labelledby', 'mission-tab-' + m.id);
-      panel.appendChild(h('h4', { text: m.name + ' mission' }));
-      panel.appendChild(h('p', { class: 'rover', text: m.rover }));
-      if (m.drone) {
-        panel.appendChild(h('ul', { class: 'roles' }, m.roles.map(function (r) { return h('li', null, [h('b', { text: r[0] }), h('span', { text: r[1] })]); })));
-      } else {
-        panel.appendChild(h('p', { class: 'no-drone', text: 'Drone use is not allowed in this mission.' }));
-      }
+
+    card.appendChild(h('span', {
+      class: 'pts',
+      text: m.points + ' points'
+    }));
+
+    card.appendChild(h('h4', {
+      text: m.name + ' Mission'
+    }));
+
+    card.appendChild(h('span', {
+      class: 'mission-status',
+      text: m.drone ? 'Drone Permitted' : 'No Drone'
+    }));
+
+    card.appendChild(h('p', {
+      class: 'rover',
+      text: m.rover
+    }));
+
+    if (m.drone) {
+      card.appendChild(
+        h('ul', { class: 'roles' },
+          m.roles.map(function (r) {
+            return h('li', null, [
+              h('b', { text: r[0] }),
+              h('span', { text: r[1] })
+            ]);
+          })
+        )
+      );
+    } else {
+      card.appendChild(h('p', {
+        class: 'no-drone',
+        text: 'Drone use is not allowed in this mission.'
+      }));
     }
-    render();
-  }
+
+    grid.appendChild(card);
+  });
+}
+
   function requirements() {
     var el = $('#req-cards'); if (!el) return;
     D.requirements.forEach(function (grp) {
@@ -153,27 +178,45 @@
   }
 
   /* ---------------------------------------------------------- concept */
-  function methodology() {
-    var list = $('#method-steps'), panel = $('#method-panel'); if (!list) return;
-    var cur = 0;
-    D.methodology.forEach(function (m, i) {
-      list.appendChild(h('li', null, [h('button', { type: 'button', role: 'tab', class: 'method-step', id: 'method-step-' + i,
-        onclick: function () { cur = i; render(); } }, [
-        h('span', { class: 'n', text: String(i + 1) }), h('span', { class: 't', text: m.step }), h('span', { class: 's', text: m.sub })
-      ])]));
+  
+function methodology() {
+  var grid = $('#method-grid');
+  if (!grid) return;
+
+  D.methodology.forEach(function (m, i) {
+    var card = h('article', {
+      class: 'card method-static'
     });
-    function render() {
-      var m = D.methodology[cur];
-      $$('.method-step', list).forEach(function (b, i) { b.classList.toggle('on', i === cur); b.setAttribute('aria-selected', i === cur ? 'true' : 'false'); });
-      panel.textContent = '';
-      panel.setAttribute('aria-labelledby', 'method-step-' + cur);
-      panel.appendChild(h('span', { class: 'big-n', text: pad2(cur + 1) }));
-      panel.appendChild(h('h4', { text: m.step }));
-      panel.appendChild(h('p', { text: m.text }));
-      if (m.loop) panel.appendChild(h('p', { class: 'loop', text: m.loop }));
+
+    card.appendChild(h('span', {
+      class: 'big-n',
+      text: pad2(i + 1)
+    }));
+
+    card.appendChild(h('h4', {
+      text: m.step
+    }));
+
+    card.appendChild(h('p', {
+      class: 'method-subtitle',
+      text: m.sub
+    }));
+
+    card.appendChild(h('p', {
+      text: m.text
+    }));
+
+    if (m.loop) {
+      card.appendChild(h('p', {
+        class: 'loop',
+        text: m.loop
+      }));
     }
-    render();
-  }
+
+    grid.appendChild(card);
+  });
+}
+
 
   /* ------------------------------------------------------- propulsion */
   function propulsionTables() {

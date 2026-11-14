@@ -567,73 +567,178 @@
   }
 
   /* ----------------------------------------- 07 link-budget explorer */
-  function linkExplorer() {
-    var el = $('#chart-link'); if (!el) return;
-    var L = D.links, tabs = $('#link-options'), dist = $('#lk-dist'), cable = $('#lk-cable'), cableWrap = $('#lk-cable-wrap');
-    var cur = L.options[0], picked = false;
-    L.options.forEach(function (o, i) {
-      tabs.appendChild(h('button', { type: 'button', role: 'tab', 'data-id': o.id, text: o.short, class: i ? '' : 'on', 'aria-selected': i ? 'false' : 'true',
-        onclick: function () { cur = o; picked = true; if (!o.cable) cable.checked = false; redraw(); } }));
+  
+function linkExplorer() {
+  var grid = $('#link-graphs-grid');
+  var dist = $('#lk-dist');
+
+  if (!grid || !dist) return;
+
+  var L = D.links;
+  var graphs = [];
+
+  // Create a graph card for every radio link
+  L.options.forEach(function (o) {
+    var card = h('div', {
+      class: 'card link-graph-card'
     });
-    var holder = h('div'); el.appendChild(holder);
-    function draw(w) {
-      var d = +dist.value, useCable = cable.checked && cur.cable > 0, grp = GROUP[cur.group];
-      var here = linkAt(cur, d, useCable), r20 = rangeFor(cur, L.marginTarget, useCable), r0 = rangeFor(cur, 0, useCable);
-      var left = 46, right = w - 16, top = 22, bottom = 262, hgt = 308;
-      var g = frame(holder, w, hgt, 'Received signal power against range for the selected radio link');
-      var x = logS(0.1, 100, left, right), y = lin(-130, -40, bottom, top);
-      var yt = [-130, -110, -90, -70, -50];
-      [0.2, 0.5, 2, 5, 20, 50].forEach(function (t) { s('line', { class: 'gridline', x1: x(t), x2: x(t), y1: top, y2: bottom }, g); });
-      axes(g, { x: x, y: y, xt: [0.1, 1, 10, 100], yt: yt, left: left, right: right, top: top, bottom: bottom,
-        xfmt: function (t) { return t + ' km'; }, xlabel: 'Range (log scale)', ylabel: 'Received power (dBm)' });
-      var thr = cur.sens + L.marginTarget;
-      s('line', { class: 'thresh', x1: left, x2: right, y1: y(cur.sens), y2: y(cur.sens) }, g);
-      s('text', { class: 'lbl', x: left + 8, y: y(cur.sens) + 15 }, g, 'Receiver sensitivity ' + cur.sens + ' dBm');
-      s('line', { class: 'thresh-accent', x1: left, x2: right, y1: y(thr), y2: y(thr) }, g);
-      s('text', { class: 'lbl', x: left + 8, y: y(thr) + 15 }, g, '20 dB margin threshold');
-      var pts = [], k;
-      for (k = 0; k <= 60; k++) { var dk = 0.1 * Math.pow(1000, k / 60); pts.push([dk, clamp(linkAt(cur, dk, useCable).prx, -130, -40)]); }
-      s('path', { class: 'line c' + grp.cls, d: 'M' + pts.map(function (p) { return x(p[0]).toFixed(1) + ',' + y(p[1]).toFixed(1); }).join('L') }, g);
-      s('line', { class: 'gridline', x1: x(L.hop), x2: x(L.hop), y1: top, y2: bottom, 'stroke-dasharray': '2 3' }, g);
-      s('text', { x: x(L.hop) + 5, y: bottom - 6 }, g, 'design hop 1.2 km');
-      crosshair(g, g, {
-        left: left, right: right, top: top, bottom: bottom, min: 0.1, max: 100, start: d, inv: x.inv, dotClass: 'f' + grp.cls,
-        label: 'Received power against range. Arrow keys change the range.',
-        stepFn: function (v, dir, big) { return v * Math.pow(1.08, dir * (big ? 5 : 1)); },
-        read: function (v) {
-          var r = linkAt(cur, v, useCable);
-          return { px: x(v), py: y(clamp(r.prx, -130, -40)), title: 'Range ' + kmText(v),
-            rows: [{ color: cssVar(el, '--s' + grp.cls), value: fmt(r.prx, 1) + ' dBm', label: 'received' }, { value: fmt(r.margin, 1) + ' dB', label: 'margin' }] };
-        },
-        onPick: function (v) { dist.value = clamp(Math.round(v * 20) / 20, 0.1, 10); redraw(); }
-      });
-      if (r20 >= 0.1 && r20 <= 100) {
-        s('circle', { class: 'dot f' + grp.cls, r: 5, cx: x(r20), cy: y(thr), 'pointer-events': 'none' }, g);
-        var endA = x(r20) > right - 120;
-        s('text', { class: 'lbl-strong', x: x(r20) + (endA ? -9 : 9), y: y(thr) - 9, 'text-anchor': endA ? 'end' : 'start', 'pointer-events': 'none' }, g, kmText(r20));
-      }
-      s('line', { class: 'cross', x1: x(d), x2: x(d), y1: top, y2: bottom, 'pointer-events': 'none' }, g);
-      s('circle', { class: 'dot', r: 6.5, cx: x(d), cy: y(clamp(here.prx, -130, -40)), fill: cssVar(el, '--accent'), 'pointer-events': 'none' }, g);
-      /* read-outs */
-      $('#lk-dist-out').textContent = kmText(d);
-      cableWrap.hidden = !(cur.cable > 0);
-      $$('button', tabs).forEach(function (b) { var on = b.getAttribute('data-id') === cur.id; b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); });
-      readouts($('#lk-readouts'), [
-        { label: 'Link margin at ' + kmText(d), value: fmt(here.margin, 1), unit: 'dB',
-          state: here.margin >= L.marginTarget ? 'ok' : here.margin >= 0 ? 'warn' : 'bad',
-          sub: here.margin >= L.marginTarget ? 'Meets the 20 dB target' : here.margin >= 0 ? 'Link closes, below 20 dB target' : 'Below receiver sensitivity' },
-        { label: 'Received power', value: fmt(here.prx, 1), unit: 'dBm', sub: 'Path loss ' + fmt(here.fspl, 1) + ' dB, other losses ' + fmt(here.loss, 2) + ' dB' },
-        { label: 'Range with 20 dB margin', value: r20 >= 100 ? fmt(r20) : fmt(r20, 2), unit: 'km', sub: 'Link closes at ' + kmText(r0) }
+
+    var title = h('h4', {
+      text: o.name
+    });
+
+    var subtitle = h('p', {
+      class: 'note',
+      text: o.gear
+    });
+
+    var chart = h('div', {
+      class: 'chart link-chart'
+    });
+
+    var readout = h('div', {
+      class: 'link-graph-readout'
+    });
+
+    card.appendChild(title);
+    card.appendChild(subtitle);
+    card.appendChild(chart);
+    card.appendChild(readout);
+
+    grid.appendChild(card);
+
+    graphs.push({
+      option: o,
+      chart: chart,
+      readout: readout
+    });
+  });
+
+  function drawGraph(item) {
+    var o = item.option;
+    var d = Number(dist.value);
+
+    var w = Math.max(280, item.chart.clientWidth);
+    var left = 50;
+    var right = w - 20;
+    var top = 25;
+    var bottom = 245;
+
+    var g = frame(
+      item.chart,
+      w,
+      290,
+      'Received power against range'
+    );
+
+    var x = logS(0.1, 100, left, right);
+    var y = lin(-130, -40, bottom, top);
+
+    axes(g, {
+      x: x,
+      y: y,
+      xt: [0.1, 1, 10, 100],
+      yt: [-130, -110, -90, -70, -50],
+      left: left,
+      right: right,
+      top: top,
+      bottom: bottom,
+      xfmt: function (v) { return v + ' km'; },
+      xlabel: 'Range (log scale)',
+      ylabel: 'Power (dBm)'
+    });
+
+    var threshold = o.sens + L.marginTarget;
+
+    // Receiver sensitivity line
+    s('line', {
+      class: 'thresh',
+      x1: left,
+      x2: right,
+      y1: y(o.sens),
+      y2: y(o.sens)
+    }, g);
+
+    // Minimum 20 dB margin line
+    s('line', {
+      class: 'thresh-accent',
+      x1: left,
+      x2: right,
+      y1: y(threshold),
+      y2: y(threshold)
+    }, g);
+
+    // Received power curve
+    var points = [];
+
+    for (var k = 0; k <= 100; k++) {
+      var range = 0.1 * Math.pow(1000, k / 100);
+      var result = linkAt(o, range, false);
+
+      points.push([
+        range,
+        clamp(result.prx, -130, -40)
       ]);
-      $('#lk-headline').textContent = cur.name + ' · ' + cur.gear;
-      $('#lk-note').textContent = cur.note;
-      /* once the reader picks a link, echo the choice on the signal-architecture diagram */
-      if (picked && window.MRT && window.MRT.highlightLink) window.MRT.highlightLink(cur.group);
     }
-    var redraw = mount(holder, draw);
-    dist.addEventListener('input', redraw);
-    cable.addEventListener('change', redraw);
+
+    var group = GROUP[o.group];
+
+    s('path', {
+      class: 'line c' + group.cls,
+      d: 'M' + points.map(function (p) {
+        return x(p[0]).toFixed(1) +
+          ',' + y(p[1]).toFixed(1);
+      }).join('L')
+    }, g);
+
+    // Current operating distance
+    var result = linkAt(o, d, false);
+
+    s('line', {
+      class: 'cross',
+      x1: x(d),
+      x2: x(d),
+      y1: top,
+      y2: bottom
+    }, g);
+
+    s('circle', {
+      class: 'dot f' + group.cls,
+      r: 6,
+      cx: x(d),
+      cy: y(clamp(result.prx, -130, -40))
+    }, g);
+
+    var maxRange = rangeFor(
+      o,
+      L.marginTarget,
+      false
+    );
+
+    item.readout.textContent =
+      'Received: ' + fmt(result.prx, 1) + ' dBm' +
+      ' | Margin: ' + fmt(result.margin, 1) + ' dB' +
+      ' | 20 dB range: ' + fmt(maxRange, 2) + ' km';
   }
+
+  function redraw() {
+    var d = Number(dist.value);
+
+    $('#lk-dist-out').textContent =
+      d.toFixed(2) + ' km';
+
+    graphs.forEach(function (item) {
+      item.chart.textContent = '';
+      drawGraph(item);
+    });
+  }
+
+  dist.addEventListener('input', redraw);
+  window.addEventListener('resize', redraw);
+
+  redraw();
+}
+
 
   /* --------------------------------------------------------- exports */
   window.MRT = {
