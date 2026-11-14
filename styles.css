@@ -975,14 +975,84 @@ details.chart-data .table th, details.chart-data .table td { padding: 6px 10px; 
   opacity: 0.75;
 }
 
-/* Conclusion Section */
 
-#conclusion p {
-  line-height: 1.8;
-  margin-bottom: 20px;
+/* ========================================= */
+/* CONCLUSION SECTION                        */
+/* ========================================= */
+
+#conclusion {
+  background: #222831;
+  padding: 80px 0 100px;
 }
 
-#conclusion .sub {
-  margin-top: 30px;
-  margin-bottom: 15px;
+#conclusion .conclusion-header {
+  max-width: 1100px;
+}
+
+/* Small numbered label */
+
+.conclusion-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 16px;
+
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #94a3b8;
+}
+
+.conclusion-number {
+  color: #ff7958;
+  font-weight: 700;
+}
+
+.conclusion-line {
+  width: 22px;
+  height: 1px;
+  background: #ff7958;
+}
+
+/* Main heading */
+
+#conclusion h2 {
+  font-size: clamp(32px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+
+  color: #f8fafc;
+
+  margin: 0 0 20px;
+}
+
+/* Paragraph text */
+
+#conclusion p {
+  max-width: 550px;
+
+  font-size: 16px;
+  line-height: 1.65;
+
+  color: #e2e8f0;
+
+  margin: 0 0 20px;
+}
+
+/* Mobile layout */
+
+@media (max-width: 768px) {
+  #conclusion {
+    padding: 60px 0 80px;
+  }
+
+  #conclusion h2 {
+    font-size: 32px;
+  }
+
+  #conclusion p {
+    font-size: 15px;
+  }
 }

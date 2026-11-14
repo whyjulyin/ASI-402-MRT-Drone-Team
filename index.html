@@ -39,8 +39,8 @@
   </a>
   <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav">Sections</button>
   <nav class="nav" id="nav" aria-label="Report sections">
-    <a href="#introduction">Introduction</a>
     <a href="#team">Team</a>
+    <a href="#introduction">Introduction</a>
     <a href="#background">Background</a>
     <a href="#concept">Concept</a>
     <a href="#propulsion">Propulsion</a>
@@ -104,7 +104,7 @@
     <h3 class="sub">NUS Mars Rover Team subsystems</h3>
     <ul class="subsystems" id="subsystems"></ul>
 
-    <p class="ack"><h2>Acknowledgements</h2>We thank our supervisors, Mr Eugene Ee and Professor Scott, the other Mars Rover Team subsystems, and the previous drone team for sharing their technical knowledge and experience.</p>
+    <p class="ack"><h2>Acknowledgements</h2>We thank our supervisors, Mr Eugene Ee and Professor Scott Howe, the other Mars Rover Team subsystems, and the previous drone team for sharing their technical knowledge and experience.</p>
   </div>
 </section>
 
@@ -291,17 +291,43 @@
 
     <h3 class="sub"><span class="step-n">3</span>Battery Selection</h3>
     <p class="body">Because the dummy mass must match the battery weight, a heavier pack adds energy but also twice its own mass to lift. This graph recalculates the final flight endurance, taking into account changes in take-off mass, thrust, motor operating point and power for each battery mass.</p>
-    
+    <figure class="figure explorer">
+      <div class="explorer-main">
+        <div class="fig-head"><h3>Hover time against battery mass</h3><p id="en-headline"></p></div>
+        <div class="chart" id="chart-endurance"></div>
+        <label class="slider wide"><span>Battery mass <output id="en-batt-out"></output></span>
+          <input type="range" id="en-batt" min="400" max="2500" step="10" value="1240"></label>
+        <div class="readouts r4 tight" id="en-readouts" aria-live="polite"></div>
+      </div>
+      <aside class="explorer-side">
+        <h4>Model assumptions</h4>
+        <label class="slider"><span>Specific energy <output id="en-se-out"></output></span>
+          <input type="range" id="en-se" min="200" max="350" step="1" value="287"></label>
+        <label class="slider"><span>Usable depth of discharge <output id="en-dod-out"></output></span>
+          <input type="range" id="en-dod" min="60" max="100" step="1" value="80"></label>
+        <label class="slider"><span>ESC efficiency <output id="en-esc-out"></output></span>
+          <input type="range" id="en-esc" min="80" max="100" step="1" value="90"></label>
+        <label class="slider"><span>Wiring efficiency <output id="en-wire-out"></output></span>
+          <input type="range" id="en-wire" min="80" max="100" step="1" value="90"></label>
+        <label class="slider"><span>Energy reserve <output id="en-res-out"></output></span>
+          <input type="range" id="en-res" min="0" max="30" step="1" value="15"></label>
+        <label class="slider"><span>Auxiliary load <output id="en-aux-out"></output></span>
+          <input type="range" id="en-aux" min="20" max="100" step="1" value="60"></label>
+        <button class="btn btn-small" id="en-reset" type="button">Reset to design values</button>
+      </aside>
+      <figcaption>Fixed mass 2,384&nbsp;g (everything except battery and dummy, including 5% growth). The 60&nbsp;W auxiliary load equals the summed peak draw of payload and avionics.</figcaption>
+    </figure>
+
     <div class="grid g2 align-start mt">
       <div>
-        <h4>What the sweep shows</h4>
+        <h4>Graphical Analysis</h4>
         <ul class="ticks">
           <li>Endurance rises across the whole feasible range, with diminishing returns.</li>
           <li>The curve only peaks near 2.3&nbsp;kg of battery, where battery mass equals the rest of the aircraft, as momentum theory predicts.</li>
           <li>The 5&nbsp;kg cap binds long before that, so battery mass is maximised within it.</li>
         </ul>
-        <p class="body">A high-energy lithium-ion pack was preferred over a high-discharge LiPo: more energy per gram suits a hover mission, provided the pack can supply the current. Hover draws about 20&nbsp;A for propulsion against a 48&nbsp;A continuous rating.</p>
-        <p class="note">Next: measure thrust and electrical power on a thrust stand, then replace the hover-only model with a mission profile covering take-off, climb, transit, survey, hover and descent.</p>
+        <p class="body">A high-energy lithium-ion pack was preferred over a high-discharge LiPo as it provides more energy per gram, which suits a hover mission, provided the pack can supply the required current. Hover draws about 20&nbsp;A for propulsion against a 48&nbsp;A continuous rating.</p>
+        <p class="note">We will verify the thrust and electrical power on a thrust stand, then replace the hover-only model with a mission profile covering take-off, climb, transit, survey, hover and descent.</p>
       </div>
       <div class="card">
         <h4>Selected battery</h4>
@@ -318,7 +344,7 @@
     <header class="sec-head">
       <p class="eyebrow"><b>05</b> Airframe</p>
       <h2>Airframe Design</h2>
-      <p class="lede">The symmetric four-arm frame is sized for 18-inch propellers. The upper platform carries the flight controller and radios, while the lower section carries the battery and the camera gimbal.</p>
+      <p class="lede">The symmetric four-arm frame is sized for 18-inch propellers. The upper platform carries the flight controller and radios, while the lower section carries the battery and the camera gimbal. </p>
     </header>
 
     <div class="anatomy" id="anatomy">
@@ -651,25 +677,32 @@
 <section id="conclusion" class="section">
   <div class="container">
 
-    <h2>Conclusion</h2>
+    <!-- Section Header -->
+    <div class="conclusion-header">
 
-    <h3 class="sub">Project Summary</h3>
+      <div class="conclusion-eyebrow">
+        <span class="conclusion-number">09</span>
+        <span class="conclusion-line"></span>
+        <span>CONCLUSION</span>
+      </div>
 
-    <p>
-      Our project aims to develop a custom quadcopter for supporting the NUS Mars Rover Team in the University Rover Challenge 2027, with our main capabilities of aerial reconnaissance and establishing NVLOS communications relay. Overall, we laid the foundation of our design in this semester through an iterative design process, and developed a clear plan for full integration and operational testing of the drone in semester 2.
-    </p>
+      <h2>Conclusion</h2>
 
-    <h3 class="sub">Current Progress</h3>
+      <p>
+        Our project aims to develop a custom quadcopter for supporting the NUS Mars Rover Team in the University Rover Challenge 2027, with our main capabilities of aerial reconnaissance and establishing NVLOS communications relay. Overall, we laid the foundation of our design in this semester through an iterative design process, and developed a clear plan for full integration and operational testing of the drone in semester 2.
+    
+      </p>
 
-    <p>
-      Throughout this first semester, our team established our preliminary system architecture and component selections, conducting subsystem-level analysis to evaluate the feasibility of the proposed design. Significant progress was made in propulsion and battery optimisation, mechanical design, electrical system integration and wireless communication architecture. Using iterative mass budgeting, flight endurance estimation, and link budgeting calculations, we developed a design that both achieves mission objectives and stays within competition restrictions. Initial wireless repeater connectivity has also been successfully established.
-    </p>
+      <p>
+        Throughout this first semester, our team established our preliminary system architecture and component selections, conducting subsystem-level analysis to evaluate the feasibility of the proposed design. Significant progress was made in propulsion and battery optimisation, mechanical design, electrical system integration and wireless communication architecture. Using iterative mass budgeting, flight endurance estimation, and link budgeting calculations, we developed a design that both achieves mission objectives and stays within competition restrictions. Initial wireless repeater connectivity has also been successfully established.
+    
+      </p>
 
-    <h3 class="sub">Future Work</h3>
+      <p>
+        Nevertheless, uncertainties remain in terms of actual flight performance, due to a heavy reliance on manufacturer specifications and theoretical calculation frameworks. While conservative design margins have been incorporated to account for our potential discrepancies, further experimental validation required to verify actual performance and reliability. In semester 2, we aim to complete mechanical and electrical integration of the parts, along with individual component testing, before proceeding with flight tests, CV integration and ultimately mission planning for the final competition. These activities will help to address our uncertainties in flight performance and evaluate the system against our initial design requirements, to ensure an operationally ready drone before our final submission and URC2027 Competition.
+      </p>
 
-    <p>
-      Nevertheless, uncertainties remain in terms of actual flight performance, due to a heavy reliance on manufacturer specifications and theoretical calculation frameworks. While conservative design margins have been incorporated to account for our potential discrepancies, further experimental validation required to verify actual performance and reliability. In semester 2, we aim to complete mechanical and electrical integration of the parts, along with individual component testing, before proceeding with flight tests, CV integration and ultimately mission planning for the final competition. These activities will help to address our uncertainties in flight performance and evaluate the system against our initial design requirements, to ensure an operationally ready drone before our final submission and URC2027 Competition.
-    </p>
+    </div>
 
   </div>
 </section>

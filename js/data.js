@@ -513,11 +513,11 @@ window.DRONE = {
       sections: ['electrical'] },
     { id: 'benedict', name: 'Benedict Lim Wei Chen', short: 'Benedict', role: 'Propulsion and power systems', track: 'Aeronautical specialisation',
       photo: 'assets/img/team-benedict.png',
-      work: ['Motor–propeller selection', 'Battery sizing and modelling', 'Thrust testing and validation'],
+      work: ['Motor–propeller selection', 'Battery sizing and modelling', 'Thrust testing and validation', "CAD assembly modelling"],
       sections: ['concept', 'propulsion'] },
-    { id: 'zihann', name: 'Looi Zi Hann', short: 'Zi Hann', role: 'Team member', track: 'Aeronautical specialisation',
+    { id: 'zihann', name: 'Looi Zi Hann', short: 'Zi Hann', role: 'Mechanical and structural systems', track: 'Aeronautical specialisation',
       photo: 'assets/img/team-zihann.jpg',
-      work: ['Structural FEA'],
+      work: ['Structural FEA', 'CAD assembly modelling', 'Mechanical integration and testing'],
       sections: ['airframe'] }
   ],
 
