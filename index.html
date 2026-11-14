@@ -136,7 +136,7 @@
     <figure class="figure sim" id="sim">
       <div class="fig-head">
         <h3>Maintaining NVLOS Connectivity</h3>
-        <p>This illustration shows how the drone will be operated to maintain connectivity in NVLOS situations. We will fly the drone above major obstacles like hills and stay equidistant between the rover and C2 station to ensure a reliable communication link. This will primarily be used in the Delivery Mission.</p>
+        <p>This illustration shows how the drone will be operated to maintain connectivity in NVLOS situations. We will fly the drone above major obstacles like hills and stay around the midpoint between the rover and C2 station to ensure a reliable communication link. This will primarily be used in the Delivery Mission.</p>
       </div>
       <div class="sim-stage" id="relay-sim"></div>
       <div class="sim-controls">
@@ -345,6 +345,7 @@
       <p class="eyebrow"><b>05</b> Airframe</p>
       <h2>Airframe Design</h2>
       <p class="lede">The symmetric four-arm frame is sized for 18-inch propellers. The upper platform carries the flight controller and radios, while the lower section carries the battery and the camera gimbal. </p>
+      <p class="lede">This frame design balances structural integrity with weight considerations. The battery is located near the geometric centre to reduce its contribution to centre-of-gravity offset; the full mass-weighted CG must still be calculated, including the equal dummy mass. The underslung camera supports downward terrain observation, while the landing gear provides ground clearance</p>
     </header>
 
     <div class="anatomy" id="anatomy">
@@ -375,7 +376,7 @@
           <h4>Frame Specifications</h4>
           <dl class="spec" id="frame-facts"></dl>
         </div>
-        <h4 class="mt"></h4>
+        <h4 class="mt">Design Considerations</h4>
         <p class="body">This preliminary CAD assembly was built before the parts arrived. With hardware now in hand, we will verify the dimensions of the components, refine the mounts, propeller clearance and wiring access, locate the centre of gravity and run finite element analysis. No structural or flight validation has been done yet.</p>
       </div>
     </div>
@@ -547,7 +548,7 @@
       <article class="card"><h4>2.4GHz Relay</h4><p>23.4&nbsp;dB per hop, the same in both directions.</p></article>
       <article class="card card-warn"><h4>5.8GHz Video is the limiting link</h4><p>13.7&nbsp;dB with the stock antenna. An 8&nbsp;dBi directional antenna raises it to 19.7&nbsp;dB; The stock antenna's performance will be confirmed in our range test before purchase.</p></article>
     </div>
-    <p class="note">Control and relay both use 2.4&nbsp;GHz. We plan to place them on channels at opposite ends of the band and verify this by test. Singapore’s IMDA restricts 900&nbsp;MHz relays locally, and other rover radios may share that band, so its use will be settled in testing.</p>
+    <p class="lede">This architecture encounters some restrictions. Firstly, interference might occur if control and relay both use 2.4&nbsp;GHz. We plan to place them on channels at opposite ends of the band and verify this by testing. Secondly, Singapore’s IMDA restricts 900&nbsp;MHz relays. Lastly, other rover radios may share the 900&nbsp;MHz band. As such the 900&nbsp;MHz band will be used as a secondary option, but additional testing will also be conducted to determine its suitability.</p>
   </div>
 </section>
 

@@ -506,7 +506,7 @@ window.DRONE = {
     { id: 'julian', name: 'Julian Cheah Ming Feng', short: 'Julian', role: 'Project lead · Communication systems', track: 'Robotics specialisation',
       photo: 'assets/img/team-julian.jpg',
       work: ['RF communication architecture', 'RF component selection', 'CAD assembly modelling', 'CV model testing and integration', 'Project coordination and timeline'],
-      sections: ['comms', 'testing'] },
+      sections: ['comms', 'testing', 'plan'] },
     { id: 'joel', name: 'Joel Jesukumar William', short: 'Joel', role: 'Electrical and control systems', track: 'Robotics specialisation',
       photo: 'assets/img/team-joel.jpg',
       work: ['Wiring architecture', 'Flight-controller and ESC selection', 'CAD assembly modelling', 'Controller software integration', 'PID tuning'],
