@@ -8,16 +8,17 @@ Static site: no framework, no build step, no npm. It runs from GitHub Pages or b
 
 | Section | Interactive pieces |
 |---|---|
-| 01 Mission | Mission cards, **line-of-sight relay simulator** (drag the rover and drone), requirements, targets against evidence |
-| 02 Background | Predecessor review, thrust-loss breakdown, lesson → design response |
-| 03 Concept | Design-methodology stepper, 3 kg vs 5 kg mass budget and endurance charts |
-| 04 Propulsion | Sizing calculator, motor test-data explorer, **hover-endurance model** with adjustable assumptions |
-| 05 Airframe | CAD views with hotspots, **3D frame viewer** with propeller discs |
-| 06 Electrical | **Clickable system architecture**, harness tables, pan/zoom wiring diagram, port map, software stack |
-| 07 Comms | Signal architecture, **link-budget calculator** for all five link options |
-| 08 Testing | Progress pipeline, repeater ping logs, verified-vs-pending table |
-| 09 Plan | Challenges, risk matrix (before/after), roadmap, filterable Gantt chart |
-| 10 Team | Members and individual areas of work, workstream matrix |
+| 00 Team | Members and individual areas of work |
+| 01 Mission | Mission Descriptions, Design requirements, Proposed Solution |
+| 02 Background | Review of URC2026 |
+| 03 Concept | Design-methodology, 3 kg vs 5 kg mass budget and endurance charts |
+| 04 Propulsion | Motor-Propeller Sizing, hover-endurance model |
+| 05 Airframe | CAD Model, Component Layout |
+| 06 Electrical | Wiring architecture, software stack |
+| 07 Comms | Signal architecture, link-budget calculations for all five link options |
+| 08 Testing | Preliminary Test, Future Testing Plans |
+| 09 Plan | Technical Challenges, risk matrix (before/after), Project Timeline |
+| 10 Conclusion |
 | Appendices | Bill of materials, flight-controller trade study, link inputs, motor data, abbreviations, references |
 
 ## Files
@@ -35,21 +36,13 @@ assets/model/         frame-model.js, the 3D mesh (loaded only on request)
 tools/                Local preview server and the STL-to-web converter
 ```
 
-## Updating content
-
-- **Numbers, tables, parts, risks, Gantt tasks:** edit `js/data.js`. Charts, calculators and tables all read from it, so a value changed there updates everywhere.
-- **Sentences and headings:** edit `index.html`.
-- **Colours and fonts:** edit the tokens at the top of `styles.css` (`:root`, `.dark`, `.light`).
-- **Team photos:** put a square image in `assets/img/` and set `photo` for that member in `js/data.js` (`team` list). Members without a photo show an initial.
-- **Evidence tags:** each target and test carries `calc`, `mfr`, `bench` or `pending`. When a test is done, change the tag and the number together.
-
 ### Models behind the calculators
 
 - **Endurance:** take-off mass = 2,384 g fixed + 2 × battery mass (the dummy equals the battery). Thrust per motor is looked up in the manufacturer test table by linear interpolation; hover time = usable energy ÷ (4 × motor power + auxiliary load). With the design values this reproduces the sizing calculator: 1,240 g → 21.69 min.
 - **Link budget:** received power = TX power + antenna gains − free-space path loss − 2 dB other losses. This reproduces the presentation figures (35.4, 50.9, 13.7, 19.7 and 23.4 dB at 1.2 km).
 - **Relay simulator:** illustrative terrain; line of sight is tested against that terrain and margins use the relay link budget.
 
-## Word limit
+## Checking Word limit
 
 The brief allows **6,000 words for a four-person group, appendices excluded**. Open the site, press F12, and run this in the console:
 
@@ -57,7 +50,7 @@ The brief allows **6,000 words for a four-person group, appendices excluded**. O
 siteWordCount()
 ```
 
-It prints words per section, the total as displayed, and the total with every interactive state included. Data tables under charts and the appendix section are not counted. At hand-over the totals were about 4,150 and 4,800.
+It prints words per section, the total as displayed, and the total with every interactive state included. Data tables under charts and the appendix section are not counted. 
 
 ## Preview locally
 
@@ -93,6 +86,6 @@ powershell -ExecutionPolicy Bypass -File tools\stl-to-web.ps1 -Stl "path\to\mode
 
 The converter welds vertices, quantises positions to 16 bits and writes an indexed mesh. The viewer expects millimetres with Z up, and draws the propeller discs from the constants at the top of `js/viewer3d.js`.
 
-## Caveats
+## Notes
 
 This is an interim design report. Apart from the repeater ping test, every performance figure is a calculation from manufacturer data and is labelled as such on the page. Update the numbers and their evidence tags as bench and flight tests are completed.
